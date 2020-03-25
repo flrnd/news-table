@@ -13,8 +13,12 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(url);
-      setData(result.data);
+      try {
+        const result = await axios(url);
+        setData(result.data);
+      } catch (error) {
+        console.error(`Fetch error: ${error}`);
+      }
     };
     fetchData();
   }, [url]);

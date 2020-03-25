@@ -32,7 +32,7 @@ function App() {
         </button>
       </div>
       <div className="table-wrapper">
-        <table>
+        <table id="data">
           <thead>
             <tr>
               {firstRow.map((heading, index) => (

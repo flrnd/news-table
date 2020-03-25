@@ -6,7 +6,7 @@ const firstRow = [" ", "A", "B", "C"];
 const header = [" ", "Date", "Header", "Link"];
 function App() {
   const [data, setData] = useState({ articles: [] });
-  const [query, setQuery] = useState("apple");
+  const [query, setQuery] = useState("");
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_URL = `http://newsapi.org/v2/everything?q=${query}&apiKey=${API_KEY}`;
   const [url, setUrl] = useState(API_URL);

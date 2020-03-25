@@ -8,7 +8,7 @@ function App() {
   const [data, setData] = useState({ articles: [] });
   const [query, setQuery] = useState("");
   const API_KEY = process.env.REACT_APP_API_KEY;
-  const API_URL = `http://newsapi.org/v2/everything?q=${query}&apiKey=${API_KEY}`;
+  const API_URL = `https://newsapi.org/v2/everything?q=${query}&apiKey=${API_KEY}`;
   const [url, setUrl] = useState(API_URL);
 
   useEffect(() => {

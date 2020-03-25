@@ -9,6 +9,6 @@ We should be able to see the history up to 3 days ago. A small search is optiona
 Expected output should be something like the below.
 ![output](./assets/image003.png)
 
-## TODO
-[] Update every 5 minutes.
+## Notes
+* The search button serves also as a refresh, using the last search query as a parameter. (Not the best UX by a long shot, but it works).
 

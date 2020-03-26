@@ -32,7 +32,13 @@ function App() {
             event.key === "Enter" ? setUrl(API_URL) : null
           }
         />
-        <button type="button" onClick={() => setUrl(API_URL)}>
+        <button
+          type="button"
+          onClick={() => {
+            setPage(1);
+            setUrl(API_URL);
+          }}
+        >
           Search
         </button>
         <button type="button" onClick={() => setPage(handlePage(page - 1))}>
@@ -42,11 +48,11 @@ function App() {
         <button type="button" onClick={() => setPage(handlePage(page + 1))}>
           next
         </button>
+        <div className="pagination">Page: {page}</div>
       </div>
       <div className="table-wrapper">
         <Table header={header} body={data.articles} columnSize={3} />
       </div>
-      <div className="pagination">Page: {page}</div>
     </div>
   );
 }

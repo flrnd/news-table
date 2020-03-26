@@ -26,7 +26,8 @@ td:first-of-type {
 .search {
   padding: 20px;
 }
-.search button {
+
+button {
   display: inline-block;
   margin-bottom: 0;
   margin-left: 20px;
@@ -43,6 +44,9 @@ td:first-of-type {
   line-height: 1.42857143;
   border-radius: 4px;
   user-select: none;
+}
+.pagination {
+  padding: 20px;
 }
 
 input[type=text] {

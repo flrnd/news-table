@@ -3,10 +3,6 @@ import { render } from "@testing-library/react";
 import Table from "./Table";
 
 describe("<Table />", () => {
-  it("renders a row", () => {
-    const content = ["1", "2", "3"];
-  });
-
   it("renders a table", () => {
     const header = ["Header"];
     const body = [

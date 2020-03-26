@@ -5,18 +5,21 @@ import "./App.css";
 
 const header = [" ", "Date", "Header", "Link"];
 
+const handlePage = (page) => (page > 0 && page < 6 ? page : 1);
+
 function App() {
   const [data, setData] = useState({ articles: [] });
   const [query, setQuery] = useState("landscapes");
-  const API_URL = `${API}/everything?q=${query}&apiKey=${API_KEY}`;
+  const [page, setPage] = useState(1);
+  const API_URL = `${API}/everything?page=${page}&q=${query}&sortBy=publishedAt&apiKey=${API_KEY}`;
   const [url, setUrl] = useState(API_URL);
 
   useEffect(() => {
-    fetchData(query)
+    fetchData(query, page)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
     // eslint-disable-next-line
-  }, [url]);
+  }, [page, url]);
 
   return (
     <div className="App">
@@ -32,10 +35,18 @@ function App() {
         <button type="button" onClick={() => setUrl(API_URL)}>
           Search
         </button>
+        <button type="button" onClick={() => setPage(handlePage(page - 1))}>
+          previous
+        </button>
+
+        <button type="button" onClick={() => setPage(handlePage(page + 1))}>
+          next
+        </button>
       </div>
       <div className="table-wrapper">
         <Table header={header} body={data.articles} columnSize={3} />
       </div>
+      <div className="pagination">Page: {page}</div>
     </div>
   );
 }

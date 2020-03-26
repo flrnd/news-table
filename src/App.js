@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import fetchData from "./fetchData";
 import Table from "./components/Table";
 import "./App.css";
 
@@ -7,21 +7,10 @@ const header = [" ", "Date", "Header", "Link"];
 function App() {
   const [data, setData] = useState({ articles: [] });
   const [query, setQuery] = useState("landscapes");
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const API_URL = `https://newsapi.org/v2/everything?q=${query}&apiKey=${API_KEY}`;
-  const [url, setUrl] = useState(API_URL);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios(url);
-        setData(result.data);
-      } catch (error) {
-        console.error(`Fetch error: ${error}`);
-      }
-    };
-    fetchData();
-  }, [url]);
+    fetchData(query).then(data => setData(data)).catch(error => console.log(error));
+  }, [query]);
 
   return (
     <div className="App">
@@ -31,7 +20,7 @@ function App() {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <button type="button" onClick={() => setUrl(API_URL)}>
+        <button type="button" onClick={() => setQuery(query)}>
           Search
         </button>
       </div>

@@ -22,6 +22,7 @@ td:first-of-type {
   max-width: 100%;
 }
 .search {
+  display: flex;
   padding: 20px;
 }
 
@@ -44,6 +45,8 @@ button {
   user-select: none;
 }
 .pagination {
+  display: flex;
+  align-items: flex-end;
   padding: 20px;
 }
 

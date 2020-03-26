@@ -9,7 +9,9 @@ function App() {
   const [query, setQuery] = useState("landscapes");
 
   useEffect(() => {
-    fetchData(query).then(data => setData(data)).catch(error => console.log(error));
+    fetchData(query)
+      .then((response) => setData(response.data))
+      .catch((error) => console.log(error));
   }, [query]);
 
   return (

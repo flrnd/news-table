@@ -15,6 +15,7 @@ function App() {
     fetchData(query)
       .then((response) => setData(response.data))
       .catch((error) => console.log(error));
+    // eslint-disable-next-line
   }, [url]);
 
   return (

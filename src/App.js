@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Table from "./components/table";
+import Table from "./components/Table";
 import "./App.css";
 
 const header = [" ", "Date", "Header", "Link"];

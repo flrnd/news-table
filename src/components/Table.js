@@ -1,13 +1,12 @@
 import React from "react";
-import Cell from "./Cell";
 
 const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const row = (content) =>
   content.map((cell, index) => (
-    <Cell key={index} id={index}>
+    <td key={index} id={index}>
       {cell}
-    </Cell>
+    </td>
   ));
 
 const tableHeader = (size) => {
@@ -30,10 +29,10 @@ const tableBody = (header, body) => (
     <tr>{row(header)}</tr>
     {body.map((article, index) => (
       <tr key={index} id={`${index}#${article.publishedAt}`}>
-        <Cell>{index + 1}</Cell>
-        <Cell>{article.publishedAt.split("T")[0]}</Cell>
-        <Cell>{article.title}</Cell>
-        <Cell>{article.url}</Cell>
+        <td>{index + 1}</td>
+        <td>{article.publishedAt.split("T")[0]}</td>
+        <td>{article.title}</td>
+        <td style={{ width: "50%" }}>{article.url}</td>
       </tr>
     ))}
   </tbody>
@@ -42,6 +41,10 @@ const tableBody = (header, body) => (
 function Table({ header, body, columnSize }) {
   return (
     <table>
+      <colgroup>
+        <col span="2" />
+        <col style={{ whiteSpace: "nowrap" }} />
+      </colgroup>
       {tableHeader(columnSize)}
       {tableBody(header, body)}
     </table>

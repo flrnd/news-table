@@ -1,7 +1,7 @@
 import React from "react";
 
-function Cell({ key, children }) {
-  return <td key={key}>{children}</td>;
+function Cell(props) {
+  return <td>{props.children}</td>;
 }
 
 export default Cell;

@@ -1,14 +1,22 @@
 import React from "react";
-import Cell from "./cell";
+import Cell from "./Cell";
 
 const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-export const row = (content) =>
-  content.map((cell, index) => <Cell key={index}>{cell}</Cell>);
+const row = (content) =>
+  content.map((cell, index) => (
+    <Cell key={index} id={index}>
+      {cell}
+    </Cell>
+  ));
 
-export const tableHeader = (size) => {
+const tableHeader = (size) => {
   const firstRow = alphabet.split("").slice(0, size + 1);
-  const header = firstRow.map((cell, index) => <th key={index}>{cell}</th>);
+  const header = firstRow.map((cell, index) => (
+    <th key={index} id={index}>
+      {cell}
+    </th>
+  ));
 
   return (
     <thead>
@@ -17,11 +25,11 @@ export const tableHeader = (size) => {
   );
 };
 
-export const tableBody = (header, body) => (
+const tableBody = (header, body) => (
   <tbody>
     <tr>{row(header)}</tr>
     {body.map((article, index) => (
-      <tr key={index}>
+      <tr key={index} id={`${index}#${article.publishedAt}`}>
         <Cell>{index + 1}</Cell>
         <Cell>{article.publishedAt}</Cell>
         <Cell>{article.title}</Cell>
@@ -31,11 +39,13 @@ export const tableBody = (header, body) => (
   </tbody>
 );
 
-export const Table = ({ header, body, columnSize }) => {
+function Table({ header, body, columnSize }) {
   return (
     <table>
       {tableHeader(columnSize)}
       {tableBody(header, body)}
     </table>
   );
-};
+}
+
+export default Table;

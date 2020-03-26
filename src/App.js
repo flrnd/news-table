@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Table from "./components/table";
 import "./App.css";
 
-const firstRow = [" ", "A", "B", "C"];
 const header = [" ", "Date", "Header", "Link"];
 function App() {
   const [data, setData] = useState({ articles: [] });
@@ -29,38 +29,19 @@ function App() {
         <input
           type="text"
           value={query}
-          onChange={event => setQuery(event.target.value)}
+          onChange={(event) => setQuery(event.target.value)}
         />
         <button type="button" onClick={() => setUrl(API_URL)}>
           Search
         </button>
       </div>
       <div className="table-wrapper">
-        <table id="data">
-          <thead>
-            <tr>
-              {firstRow.map((heading, index) => (
-                <th key={index}>{heading}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {header.map((heading, index) => (
-                <td key={index}>{heading}</td>
-              ))}
-            </tr>
-
-            {data.articles.map((article, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{article.publishedAt.split("T")[0]}</td>
-                <td>{article.title}</td>
-                <td>{article.url}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table
+          id="data"
+          header={header}
+          body={data.articles}
+          columnSize={3}
+        ></Table>
       </div>
     </div>
   );

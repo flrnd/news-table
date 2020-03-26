@@ -1,5 +1,3 @@
 import React from "react";
 
-export const Cell = props => (
-  <td background={props.background}>{props.content}</td>
-);
+export const Cell = ({ key, children }) => <td key={key}>{children}</td>;

@@ -31,7 +31,7 @@ const tableBody = (header, body) => (
     {body.map((article, index) => (
       <tr key={index} id={`${index}#${article.publishedAt}`}>
         <Cell>{index + 1}</Cell>
-        <Cell>{article.publishedAt}</Cell>
+        <Cell>{article.publishedAt.split("T")[0]}</Cell>
         <Cell>{article.title}</Cell>
         <Cell>{article.url}</Cell>
       </tr>

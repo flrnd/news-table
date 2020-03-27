@@ -5,9 +5,7 @@ export const API_KEY = process.env.REACT_APP_API_KEY;
 export const fetchData = async (query, page) => {
   const url = `${API}/everything?page=${page}&q=${query}&sortBy=publishedAt&apiKey=${API_KEY}`;
   try {
-    const result = await axios.get(url);
-    console.log(result);
-    return result;
+    return await axios.get(url);
   } catch (error) {
     console.error(`Fetch error: ${error}`);
   }

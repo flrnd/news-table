@@ -26,38 +26,40 @@ function App() {
 
   return (
     <div className="App">
-      <div className="search">
-        <input
-          type="text"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          onKeyPress={(event) =>
-            event.key === "Enter" ? setUrl(API_URL) : null
-          }
-        />
-        <button
-          type="button"
-          onClick={() => {
-            setPage(1);
-            setUrl(API_URL);
-          }}
-        >
-          Search
-        </button>
-        <button type="button" onClick={() => setPage(handlePage(page - 1))}>
-          previous
-        </button>
+      <div className="content center">
+        <div className="search">
+          <input
+            type="text"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            onKeyPress={(event) =>
+              event.key === "Enter" ? setUrl(API_URL) : null
+            }
+          />
+          <button
+            type="button"
+            onClick={() => {
+              setPage(1);
+              setUrl(API_URL);
+            }}
+          >
+            Search
+          </button>
+          <button type="button" onClick={() => setPage(handlePage(page - 1))}>
+            previous
+          </button>
 
-        <button type="button" onClick={() => setPage(handlePage(page + 1))}>
-          next
-        </button>
-        <div className="pagination">Page: {page}</div>
-      </div>
-      <div className="table-wrapper">
-        <Table header={header} body={data.articles} columnSize={3} />
-      </div>
-      <div style={{ paddingTop: "20px" }}>
-        <a href="https://newsapi.org/">Powered By NewsAPI.org</a>
+          <button type="button" onClick={() => setPage(handlePage(page + 1))}>
+            next
+          </button>
+          <div className="pagination">Page: {page}</div>
+        </div>
+        <div className="table-wrapper">
+          <Table header={header} body={data.articles} columnSize={3} />
+        </div>
+        <div style={{ paddingTop: "20px" }}>
+          <a href="https://newsapi.org/">Powered By NewsAPI.org</a>
+        </div>
       </div>
     </div>
   );

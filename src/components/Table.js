@@ -29,10 +29,10 @@ const tableBody = (header, body) => (
     <tr>{row(header)}</tr>
     {body.map((article, index) => (
       <tr key={index} id={`${index}#${article.publishedAt}`}>
-        <td>{index + 1}</td>
-        <td>{article.publishedAt.split("T")[0]}</td>
-        <td>{article.title}</td>
-        <td style={{ width: "18%" }}>
+        <td style={{ width: "10px" }}>{index + 1}</td>
+        <td style={{ width: "100px" }}>{article.publishedAt.split("T")[0]}</td>
+        <td style={{ width: "400px" }}>{article.title}</td>
+        <td style={{ width: "200px" }}>
           <a href={article.url}>{article.source}</a>
         </td>
       </tr>

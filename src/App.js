@@ -56,6 +56,9 @@ function App() {
       <div className="table-wrapper">
         <Table header={header} body={data.articles} columnSize={3} />
       </div>
+      <div style={{ paddingTop: "20px" }}>
+        <a href="https://newsapi.org/">Powered By NewsAPI.org</a>
+      </div>
     </div>
   );
 }

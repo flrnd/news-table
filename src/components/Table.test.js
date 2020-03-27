@@ -6,7 +6,12 @@ describe("<Table />", () => {
   it("renders a table", () => {
     const header = ["Header"];
     const body = [
-      { publishedAt: "20-20-20", title: "Hello body", url: "this is a link" },
+      {
+        source: "google",
+        publishedAt: "20-20-20",
+        title: "Hello body",
+        url: "this is a link",
+      },
     ];
     const size = 2;
     const { getByText } = render(
@@ -15,6 +20,6 @@ describe("<Table />", () => {
     expect(getByText(header[0])).toBeInTheDocument();
     expect(getByText(body[0].publishedAt)).toBeInTheDocument();
     expect(getByText(body[0].title)).toBeInTheDocument();
-    expect(getByText(body[0].url)).toBeInTheDocument();
+    expect(getByText(body[0].source)).toBeInTheDocument();
   });
 });

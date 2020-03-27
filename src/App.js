@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData, API, API_KEY } from "./fetchData";
+import { fetchData, normalizeData, API, API_KEY } from "./fetchData";
 import Table from "./components/Table";
 import "./App.css";
 
@@ -16,7 +16,10 @@ function App() {
 
   useEffect(() => {
     fetchData(query, page)
-      .then((response) => setData(response.data))
+      .then((response) => {
+        const normalized = normalizeData(response.data);
+        setData(normalized.data);
+      })
       .catch((error) => console.log(error));
     // eslint-disable-next-line
   }, [page, url]);

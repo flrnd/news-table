@@ -32,7 +32,9 @@ const tableBody = (header, body) => (
         <td>{index + 1}</td>
         <td>{article.publishedAt.split("T")[0]}</td>
         <td>{article.title}</td>
-        <td style={{ width: "50%" }}>{article.url}</td>
+        <td style={{ width: "18%" }}>
+          <a href={article.url}>{article.source}</a>
+        </td>
       </tr>
     ))}
   </tbody>

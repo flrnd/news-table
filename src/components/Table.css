@@ -13,6 +13,9 @@ th {
   background: #eee;
 }
 
+th:first-of-type {
+  width: 50px;
+}
 
 td:first-of-type {
   background: #eee;

@@ -1,11 +1,12 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
 import "./Table.css";
 
 const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const row = (content) =>
   content.map((cell, index) => (
-    <td key={index} id={index}>
+    <td key={index} id={`${index}#${cell}`}>
       {cell}
     </td>
   ));
@@ -13,7 +14,7 @@ const row = (content) =>
 const tableHeader = (size) => {
   const firstRow = alphabet.split("").slice(0, size + 1);
   const header = firstRow.map((cell, index) => (
-    <th key={index} id={index}>
+    <th key={index} id={`${index}#${cell}`}>
       {cell}
     </th>
   ));
@@ -30,10 +31,10 @@ const tableBody = (header, body) => (
     <tr>{row(header)}</tr>
     {body.map((article, index) => (
       <tr key={index} id={`${index}#${article.publishedAt}`}>
-        <td style={{ width: "10px" }}>{index + 1}</td>
-        <td style={{ width: "100px" }}>{article.publishedAt.split("T")[0]}</td>
-        <td style={{ width: "450px" }}>{article.title}</td>
-        <td style={{ width: "200px" }}>
+        <td>{index + 1}</td>
+        <td>{article.publishedAt.split("T")[0]}</td>
+        <td>{article.title}</td>
+        <td>
           <a href={article.url}>{article.source}</a>
         </td>
       </tr>
@@ -41,17 +42,13 @@ const tableBody = (header, body) => (
   </tbody>
 );
 
-function Table({ header, body, columnSize }) {
+function NewsTable({ header, body, columnSize }) {
   return (
-    <table>
-      <colgroup>
-        <col span="2" />
-        <col style={{ whiteSpace: "nowrap" }} />
-      </colgroup>
+    <Table responsive="sm" hover>
       {tableHeader(columnSize)}
       {tableBody(header, body)}
-    </table>
+    </Table>
   );
 }
 
-export default Table;
+export default NewsTable;

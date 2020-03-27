@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { fetchData, normalizeData, API, API_KEY } from "./fetchData";
-import Table from "./components/Table";
+import NewsTable from "./components/Table";
 import "./App.css";
 
 const header = [" ", "Date", "Header", "Link"];
@@ -31,49 +32,60 @@ function App() {
 
   return (
     <div className="App">
-      <div className="content center">
-        <Navbar expand="lg">
-          <Navbar.Brand href="#home">Page: {page}</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Button onClick={() => setPage(handlePage(page - 1))}>
-                prev
-              </Button>
-              <Button onClick={() => setPage(handlePage(page + 1))}>
-                next
-              </Button>
-            </Nav>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-                onChange={(event) => setQuery(event.target.value)}
-                onKeyPress={(event) =>
-                  event.key === "Enter" ? setUrl(API_URL) : null
-                }
-              />
-              <Button
-                variant="outline-success"
-                onClick={() => {
-                  setPage(1);
-                  setUrl(API_URL);
-                }}
-              >
-                Search
-              </Button>
-            </Form>
-          </Navbar.Collapse>
-        </Navbar>
-
-        <div className="table-wrapper">
-          <Table header={header} body={data.articles} columnSize={3} />
-        </div>
-        <div style={{ paddingTop: "20px" }}>
-          <a href="https://newsapi.org/">Powered By NewsAPI.org</a>
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <Navbar expand="sm">
+              <Navbar.Brand href="#home">Page: {page}</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                  <Button onClick={() => setPage(handlePage(page - 1))}>
+                    prev
+                  </Button>
+                  <Button onClick={() => setPage(handlePage(page + 1))}>
+                    next
+                  </Button>
+                </Nav>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="mr-sm-2"
+                    onChange={(event) => setQuery(event.target.value)}
+                    onKeyPress={(event) =>
+                      event.key === "Enter" ? setUrl(API_URL) : null
+                    }
+                  />
+                  <Button
+                    variant="outline-success"
+                    onClick={() => {
+                      setPage(1);
+                      setUrl(API_URL);
+                    }}
+                  >
+                    Search
+                  </Button>
+                </div>
+              </Navbar.Collapse>
+            </Navbar>
+          </Col>
+          <Col xs lg="2"></Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="table-wrapper">
+              <NewsTable header={header} body={data.articles} columnSize={3} />
+            </div>
+            <div style={{ paddingTop: "20px" }}>
+              <a href="https://newsapi.org/">Powered By NewsAPI.org</a>
+            </div>
+          </Col>
+          <Col xs lg="2">
+            <h2>History</h2>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

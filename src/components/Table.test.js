@@ -4,7 +4,6 @@ import Table from "./Table";
 
 describe("<Table />", () => {
   it("renders a table", () => {
-    const header = ["Header"];
     const body = [
       {
         source: "google",
@@ -13,11 +12,8 @@ describe("<Table />", () => {
         url: "this is a link",
       },
     ];
-    const size = 2;
-    const { getByText } = render(
-      <Table header={header} body={body} columnSize={size} />
-    );
-    expect(getByText(header[0])).toBeInTheDocument();
+
+    const { getByText } = render(<Table body={body} />);
     expect(getByText(body[0].publishedAt)).toBeInTheDocument();
     expect(getByText(body[0].title)).toBeInTheDocument();
     expect(getByText(body[0].source)).toBeInTheDocument();

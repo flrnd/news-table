@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { fetchData, normalizeData, API, API_KEY } from "../fetchData";
-import { saveStore } from "../store";
 import NewsTable from "../components/Table";
 import SearchForm from "../components/SearchForm";
 import "./SearchPage.css";
@@ -10,7 +9,6 @@ import "./SearchPage.css";
 function SearchPage() {
   const [data, setData] = useState({ articles: [] });
   const [query, setQuery] = useState("");
-  const [browseHistory, setBrowseHistory] = useState({ articles: [] });
   const API_URL = `${API}/everything?q=${query}&sortBy=publishedAt&apiKey=${API_KEY}`;
   const [url, setUrl] = useState(API_URL);
 
@@ -20,7 +18,6 @@ function SearchPage() {
         .then((response) => {
           const normalized = normalizeData(response.data);
           setData(normalized.data);
-          setBrowseHistory(normalized.data);
         })
         .catch((error) => console.log(error));
     // eslint-disable-next-line
@@ -28,7 +25,6 @@ function SearchPage() {
 
   const onSearchHandler = () => {
     setUrl(API_URL);
-    saveStore(browseHistory.articles);
   };
 
   const onInputChange = (event) => {

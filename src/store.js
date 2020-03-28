@@ -16,16 +16,18 @@ export const getStore = async (day) => {
     console.error(`[E] get ${error}`);
   }
 };
+export const cleanDuplicates = (elements) => {
+  return elements.filter(
+    (item, index) =>
+      elements.findIndex((element) => element.url === item.url) === index
+  );
+};
 
 export const saveStore = async (currentHistory) => {
   try {
     const storedHistory = await getStore(TODAY);
     const todayHistory = storedHistory.concat(currentHistory);
-    // clear dups to avoid storing the same results.
-    const uniqueHistory = todayHistory.filter(
-      (item, index) =>
-        todayHistory.findIndex((element) => element.url === item.url) === index
-    );
+    const uniqueHistory = cleanDuplicates(todayHistory);
     localforage.setItem(TODAY, uniqueHistory);
   } catch (error) {
     console.error(`[E] localforage: ${error}`);

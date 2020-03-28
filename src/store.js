@@ -1,7 +1,5 @@
 import localforage from "localforage";
 
-export const TODAY = new Date().toDateString();
-
 export const getItem = async (key) => {
   try {
     const stored = await localforage.getItem(key);

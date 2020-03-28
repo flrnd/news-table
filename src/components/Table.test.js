@@ -16,6 +16,6 @@ describe("<Table />", () => {
     const { getByText } = render(<Table body={body} />);
     expect(getByText(body[0].publishedAt)).toBeInTheDocument();
     expect(getByText(body[0].title)).toBeInTheDocument();
-    expect(getByText(body[0].source)).toBeInTheDocument();
+    expect(getByText(body[0].url)).toBeInTheDocument();
   });
 });

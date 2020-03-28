@@ -1,11 +1,17 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import { saveItem } from "../store";
 import "./Table.css";
 
 const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const columns = 3;
 const firstRow = alphabet.split("").slice(0, columns + 1);
 const header = ["", "Date", "Heading", "Link"];
+
+const onClickHandler = (event) => {
+  const url = event.target.innerText;
+  saveItem(Date.now(), url);
+};
 
 const row = (content) =>
   content.map((cell, index) => (
@@ -22,9 +28,7 @@ const tableBody = (header, body) => (
         <td>{index + 1}</td>
         <td>{article.publishedAt.split("T")[0]}</td>
         <td>{article.title}</td>
-        <td>
-          <a href={article.url}>{article.source}</a>
-        </td>
+        <td onClick={onClickHandler}>{article.url}</td>
       </tr>
     ))}
   </tbody>
@@ -32,7 +36,7 @@ const tableBody = (header, body) => (
 
 function NewsTable({ body }) {
   return (
-    <Table responsive="sm" hover>
+    <Table hover>
       <thead>
         <tr>
           {firstRow.map((cell, index) => (

@@ -1,11 +1,30 @@
-import React from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useState } from "react";
+import { getAllStored } from "../store";
+
+import Button from "react-bootstrap/Button";
 
 function HistoryPage() {
+  const [history, setHistory] = useState({ data: [] });
+
+  const fetchHistory = () => {
+    getAllStored().then((item) => {
+      setHistory({ data: item });
+    });
+  };
+
   return (
     <>
-      <h1>Hello history</h1>
+      <h1>Visited</h1>
+      <Button onClick={fetchHistory}>fetch</Button>
+      <div style={{ paddingTop: "15px" }}>
+        <ul>
+          {history.data.map((h, i) => (
+            <li key={h.key} id={h.key}>
+              {h.value}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

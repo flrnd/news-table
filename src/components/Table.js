@@ -3,6 +3,9 @@ import Table from "react-bootstrap/Table";
 import "./Table.css";
 
 const alphabet = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const columns = 3;
+const firstRow = alphabet.split("").slice(0, columns + 1);
+const header = ["", "Date", "Heading", "Link"];
 
 const row = (content) =>
   content.map((cell, index) => (
@@ -10,21 +13,6 @@ const row = (content) =>
       {cell}
     </td>
   ));
-
-const tableHeader = (size) => {
-  const firstRow = alphabet.split("").slice(0, size + 1);
-  const header = firstRow.map((cell, index) => (
-    <th key={index} id={`${index}#${cell}`}>
-      {cell}
-    </th>
-  ));
-
-  return (
-    <thead>
-      <tr>{header}</tr>
-    </thead>
-  );
-};
 
 const tableBody = (header, body) => (
   <tbody>
@@ -42,10 +30,18 @@ const tableBody = (header, body) => (
   </tbody>
 );
 
-function NewsTable({ header, body, columnSize }) {
+function NewsTable({ body }) {
   return (
     <Table responsive="sm" hover>
-      {tableHeader(columnSize)}
+      <thead>
+        <tr>
+          {firstRow.map((cell, index) => (
+            <th key={index} id={`${index}#${cell}`}>
+              {cell}
+            </th>
+          ))}
+        </tr>
+      </thead>
       {tableBody(header, body)}
     </Table>
   );

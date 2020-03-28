@@ -1,17 +1,34 @@
 import localforage from "localforage";
 
-const TODAY = new Date().toDateString();
+export const TODAY = new Date().toDateString();
 
-export const isStored = (storedHistory, item) =>
-  storedHistory.find((history) => history.url === item.url);
+export const initDB = () => {
+  localforage.setItem(TODAY, [" "]);
+};
 
-export const save = async (item) => {
+export const getStore = async (day) => {
   try {
-    const todayHistory = await localforage.getItem(TODAY);
-    if (!isStored(todayHistory, item)) {
-      todayHistory.push(item);
-      localforage.setItem(TODAY, todayHistory);
-    }
+    const stored = await localforage.getItem(day);
+    if (stored === null) initDB();
+
+    return stored;
+  } catch (error) {
+    console.error(`[E] get ${error}`);
+  }
+};
+export const cleanDuplicates = (elements) => {
+  return elements.filter(
+    (item, index) =>
+      elements.findIndex((element) => element.url === item.url) === index
+  );
+};
+
+export const saveStore = async (currentHistory) => {
+  try {
+    const storedHistory = await getStore(TODAY);
+    const todayHistory = storedHistory.concat(currentHistory);
+    const uniqueHistory = cleanDuplicates(todayHistory);
+    localforage.setItem(TODAY, uniqueHistory);
   } catch (error) {
     console.error(`[E] localforage: ${error}`);
   }

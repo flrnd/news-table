@@ -1,8 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function HistoryPage() {
-  return <Link to={`/`}>Back to search</Link>;
+  return (
+    <>
+      <h1>Hello history</h1>
+    </>
+  );
 }
 
 export default HistoryPage;

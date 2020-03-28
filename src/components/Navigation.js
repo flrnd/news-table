@@ -1,16 +1,19 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
 function Navigation() {
   return (
-    <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="#home">News</Navbar.Brand>
-      <Nav className="mr-auto">
-        <Nav.Link href="/">Search</Nav.Link>
-        <Nav.Link href="/history">History</Nav.Link>
+    <>
+      <Nav className="mr-auto justify-content-end" activeKey="/">
+        <Nav.Item>
+          <Nav.Link href="/">Search</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/history">History</Nav.Link>
+        </Nav.Item>
       </Nav>
-    </Navbar>
+      <br />
+    </>
   );
 }
 

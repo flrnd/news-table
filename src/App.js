@@ -1,34 +1,42 @@
 import React, { useState, useEffect } from "react";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { fetchData, normalizeData, API, API_KEY } from "./fetchData";
+import { saveStore, getStore, TODAY } from "./store";
 import NewsTable from "./components/Table";
 import "./App.css";
 
 const header = [" ", "Date", "Header", "Link"];
-
-const handlePage = (page) => (page > 0 && page < 6 ? page : 1);
+const totalSavedHistory = async (day) => {
+  const saved = await getStore(day);
+  return saved.length;
+};
 
 function App() {
   const [data, setData] = useState({ articles: [] });
   const [query, setQuery] = useState("landscapes");
-  const [page, setPage] = useState(1);
-  const API_URL = `${API}/everything?page=${page}&q=${query}&sortBy=publishedAt&apiKey=${API_KEY}`;
+  const [browseHistory, setBrowseHistory] = useState({ articles: [] });
+  const API_URL = `${API}/everything?q=${query}&sortBy=publishedAt&apiKey=${API_KEY}`;
   const [url, setUrl] = useState(API_URL);
 
   useEffect(() => {
-    fetchData(query, page)
+    fetchData(query)
       .then((response) => {
         const normalized = normalizeData(response.data);
         setData(normalized.data);
+        setBrowseHistory(normalized.data);
       })
       .catch((error) => console.log(error));
     // eslint-disable-next-line
-  }, [page, url]);
+  }, [url]);
+
+  const onSearchHandle = () => {
+    setUrl(API_URL);
+    saveStore(browseHistory.articles);
+  };
 
   return (
     <div className="App">
@@ -36,17 +44,9 @@ function App() {
         <Row>
           <Col>
             <Navbar expand="sm">
-              <Navbar.Brand href="#home">Page: {page}</Navbar.Brand>
+              <Navbar.Brand href="#home">News search</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                  <Button onClick={() => setPage(handlePage(page - 1))}>
-                    prev
-                  </Button>
-                  <Button onClick={() => setPage(handlePage(page + 1))}>
-                    next
-                  </Button>
-                </Nav>
                 <div>
                   <input
                     type="text"
@@ -54,16 +54,10 @@ function App() {
                     className="mr-sm-2"
                     onChange={(event) => setQuery(event.target.value)}
                     onKeyPress={(event) =>
-                      event.key === "Enter" ? setUrl(API_URL) : null
+                      event.key === "Enter" ? onSearchHandle() : null
                     }
                   />
-                  <Button
-                    variant="outline-success"
-                    onClick={() => {
-                      setPage(1);
-                      setUrl(API_URL);
-                    }}
-                  >
+                  <Button variant="outline-success" onClick={onSearchHandle}>
                     Search
                   </Button>
                 </div>
@@ -83,6 +77,7 @@ function App() {
           </Col>
           <Col xs lg="2">
             <h2>History</h2>
+            <span>items saved</span>
           </Col>
         </Row>
       </Container>

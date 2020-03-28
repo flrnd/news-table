@@ -1,5 +1,5 @@
-import { save, isStored } from "./store";
-describe("Store", () => {
+import { cleanDuplicates } from "./store";
+describe("CleanDuplicates", () => {
   const history = [
     {
       id: 1,
@@ -10,14 +10,9 @@ describe("Store", () => {
       url: "b",
     },
   ];
-  const item = {
-    id: 1,
-    url: "a",
-  };
-  it("isStored should return item", () => {
-    expect(isStored(history, item)).toStrictEqual(item);
-  });
-  it("isStored should return undefined", () => {
-    expect(isStored(history, { id: 3, obj: "c" })).toStrictEqual(undefined);
+  const dup = history.concat(history);
+
+  it("Should return an array without duplicates", () => {
+    expect(cleanDuplicates(dup)).toEqual(history);
   });
 });

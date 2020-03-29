@@ -28,6 +28,7 @@ function HistoryPage() {
 
   useEffect(() => {
     if (startDate) fetchHistory(startDate);
+    console.log(startDate);
     // eslint-disable-next-line
   }, [startDate]);
   return (
@@ -35,14 +36,22 @@ function HistoryPage() {
       <Row>
         <Col sm={4}>
           <div className="label">Pick a date</div>
-          <DatePicker selected={startDate} onChange={handleStartDateChange} />
+          <DatePicker
+            selected={startDate}
+            onChange={handleStartDateChange}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            timeCaption="time"
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
         </Col>
       </Row>
       <Row>
         <Col>
           <div className="date-picker-list">
             <h4>Showing history starting at: {getDateWithNames(startDate)}</h4>
-            <Table responsive>
+            <Table>
               <thead>
                 <tr>
                   <th>Time</th>

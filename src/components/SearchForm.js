@@ -7,7 +7,7 @@ const SearchForm = ({ onSearchHandler, onInputChange }) => {
     <div className="search">
       <input
         type="text"
-        placeholder="Books, Music..."
+        placeholder="Books, Food..."
         className="mr-sm-2"
         onChange={onInputChange}
         onKeyPress={(event) =>

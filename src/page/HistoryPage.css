@@ -1,0 +1,12 @@
+.date-picker-list {
+  max-width: 636px;
+  padding: 25px 0 25px 0;
+}
+.date-picker-list h2 {
+  margin-bottom: 20px;
+}
+.label {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0 10px 0;
+}

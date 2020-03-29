@@ -1,10 +1,15 @@
 import localforage from "localforage";
+import { filterByDates } from "./util/date";
 
-export const getAllStored = async () => {
+export const getAllStored = async (startDate) => {
   const keys = await localforage.keys();
+  const keysByDate = filterByDates(startDate, keys);
+
+  console.log(keysByDate);
+
   const store = [];
 
-  for (let key of keys) {
+  for (let key of keysByDate) {
     const item = await localforage.getItem(key);
     store.push({ key, value: item });
   }
@@ -23,8 +28,9 @@ export const getItem = async (key) => {
   }
 };
 
-export const saveItem = (key, item) => {
+export const saveItem = (item) => {
   try {
+    const key = Date.now();
     localforage.setItem(key, item);
   } catch (error) {
     console.error(`[E] localforage: ${error}`);

@@ -10,7 +10,8 @@ const header = ["", "Date", "Heading", "Link"];
 
 const onClickHandler = (event) => {
   const url = event.target.innerText;
-  saveItem(Date.now(), url);
+  saveItem(url);
+  event.target.innerHTML = '<span style="color: green">saved!</span>';
 };
 
 const row = (content) =>

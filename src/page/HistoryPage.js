@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 
 import { getAllStored } from "../store";
 import { getItemTime, getDateWithNames } from "../util/date";
@@ -15,10 +15,9 @@ const TODAY = Date.now();
 function HistoryPage() {
   const [history, setHistory] = useState({ data: [] });
   const [startDate, setStartDate] = useState(TODAY);
-  const [endDate, setEndDate] = useState(TODAY);
 
-  const fetchHistory = (start, end) => {
-    getAllStored(start, end).then((stored) => {
+  const fetchHistory = (start) => {
+    getAllStored(startDate).then((stored) => {
       setHistory({ data: stored });
     });
   };
@@ -27,39 +26,38 @@ function HistoryPage() {
     setStartDate(date.getTime());
   };
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date.getTime());
-  };
-
   useEffect(() => {
-    if (startDate && endDate) fetchHistory(startDate, endDate);
-  }, [startDate, endDate]);
+    if (startDate) fetchHistory(startDate);
+    // eslint-disable-next-line
+  }, [startDate]);
   return (
     <>
       <Row>
         <Col sm={4}>
-          <div className="label">Star date</div>
+          <div className="label">Pick a date</div>
           <DatePicker selected={startDate} onChange={handleStartDateChange} />
-        </Col>
-        <Col sm={4}>
-          <div className="label">End date</div>
-          <DatePicker selected={endDate} onChange={handleEndDateChange} />
         </Col>
       </Row>
       <Row>
         <Col>
           <div className="date-picker-list">
-            <h2>{getDateWithNames(startDate)}</h2>
-            <ListGroup>
-              {history.data.map((h, i) => (
-                <ListGroup horizontal="sm">
-                  <ListGroup.Item key={h.key} id={h.key}>
-                    {getItemTime(h.key)}
-                  </ListGroup.Item>
-                  <ListGroup.Item>{h.value}</ListGroup.Item>
-                </ListGroup>
-              ))}
-            </ListGroup>
+            <h4>Showing history starting at: {getDateWithNames(startDate)}</h4>
+            <Table responsive>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                {history.data.map((h, i) => (
+                  <tr key={h.key} id={h.key}>
+                    <td>{getItemTime(h.key)}</td>
+                    <td>{h.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           </div>
         </Col>
       </Row>

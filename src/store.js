@@ -1,9 +1,9 @@
 import localforage from "localforage";
 import { filterByDates } from "./util/date";
 
-export const getAllStored = async (startDate, endDate) => {
+export const getAllStored = async (startDate) => {
   const keys = await localforage.keys();
-  const keysByDate = filterByDates([startDate, endDate], keys);
+  const keysByDate = filterByDates(startDate, keys);
 
   console.log(keysByDate);
 

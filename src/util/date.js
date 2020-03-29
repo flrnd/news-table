@@ -1,5 +1,3 @@
-import { min, max } from "./util";
-
 export const monthNames = [
   "January",
   "February",
@@ -49,13 +47,8 @@ export const getDateWithNames = (timestamp) => {
 export const getItemTime = (timestamp) =>
   new Date(parseInt(timestamp)).toLocaleTimeString();
 
-export const filterByDates = (datesRange, keys) => {
-  const startDate = min(datesRange);
-  const endDate = max(datesRange);
-  const isRange = (item, range) => item < endDate && item > startDate;
+export const filterByDates = (startDate, keys) => {
   const isEqual = (item) => item < startDate;
   const parsedKeys = keys.map((k) => parseInt(k));
-  return startDate === endDate
-    ? parsedKeys.filter(isEqual)
-    : parsedKeys.filter(isRange);
+  return parsedKeys.filter(isEqual);
 };

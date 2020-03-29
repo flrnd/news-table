@@ -42,7 +42,7 @@ function HistoryPage() {
         <Col>
           <div className="date-picker-list">
             <h4>Showing history starting at: {getDateWithNames(startDate)}</h4>
-            <Table responsive>
+            <Table>
               <thead>
                 <tr>
                   <th>Time</th>

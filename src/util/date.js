@@ -27,13 +27,10 @@ export const pad = (n) => (n < 10 ? `0${n}` : n);
 
 export const itemDate = (timestamp) => {
   const parsedDate = new Date(parseInt(timestamp));
-  const date = parsedDate.getDate();
-  const month = parsedDate.getMonth();
-  const year = parsedDate.getFullYear();
 
-  return `${pad(date)}/${pad(
-    month + 1
-  )}/${year} - ${parsedDate.toLocaleTimeString()}`;
+  return `${pad(parsedDate.getDate())}/${pad(
+    parsedDate.getMonth() + 1
+  )}/${parsedDate.getFullYear()} - ${parsedDate.toLocaleTimeString()}`;
 };
 
 export const getDateWithNames = (timestamp) => {

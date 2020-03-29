@@ -26,7 +26,7 @@ export const getItem = async (key) => {
 export const saveItem = (item) => {
   try {
     const key = Date.now();
-    localforage.setItem(key, { visited: key, url: item });
+    localforage.setItem(key, item);
   } catch (error) {
     console.error(`[E] localforage: ${error}`);
   }

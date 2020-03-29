@@ -8,7 +8,7 @@ describe("store", () => {
     const store = [];
     const key = Date.now();
     const item = "http://someurl.com";
-    const expected = { key, value: { visited: key, url: item } };
+    const expected = { key, value: item };
 
     localforage.setItem.mockImplementationOnce((k, v) => {
       store.push({ key: k, value: v });
@@ -21,8 +21,8 @@ describe("store", () => {
   it("getItem should get a item from the store", async () => {
     const key = Date.now();
     const item = "http://someurl.com";
-    const store = [{ key, value: { visited: key, url: item } }];
-    const expected = { key, value: { visited: key, url: item } };
+    const store = [{ key, value: item }];
+    const expected = { key, value: item };
 
     localforage.getItem.mockImplementationOnce(() => Promise.resolve(store[0]));
     await expect(getItem(key)).resolves.toEqual(expected);

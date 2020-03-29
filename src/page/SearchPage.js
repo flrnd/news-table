@@ -9,7 +9,7 @@ import "./SearchPage.css";
 function SearchPage() {
   const [data, setData] = useState({ articles: [] });
   const [query, setQuery] = useState("");
-  const API_URL = `${API}/everything?q=${query}&sortBy=publishedAt&apiKey=${API_KEY}`;
+  const API_URL = `${API}/sources?language=en?q=${query}&sortBy=publishedAt&apiKey=${API_KEY}`;
   const [url, setUrl] = useState(API_URL);
 
   useEffect(() => {

@@ -47,8 +47,8 @@ export const getDateWithNames = (timestamp) => {
 export const getItemTime = (timestamp) =>
   new Date(parseInt(timestamp)).toLocaleTimeString();
 
-export const filterByDates = (startDate, keys) => {
-  const isEqual = (item) => item < startDate;
+export const filterByDates = (date, keys) => {
+  const isEqual = (item) => item >= date;
   const parsedKeys = keys.map((k) => parseInt(k));
   return parsedKeys.filter(isEqual);
 };

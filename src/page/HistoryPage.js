@@ -51,7 +51,8 @@ function HistoryPage() {
         <Col>
           <div className="date-picker-list">
             <h4>Showing history starting at: {getDateWithNames(startDate)}</h4>
-            <Table>
+            <span style={{ fontSize: "11px" }}>Note: Try go back in time a few minutes or hours if your history is empty</span>
+              <Table>
               <thead>
                 <tr>
                   <th>Time</th>
